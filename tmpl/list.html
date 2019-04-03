@@ -1,0 +1,11 @@
+<h1>Lists</h1>
+<div>
+<table>
+{{ range .}}
+    <tr>
+        <td>[<a href="/edit/{{.Title}}">{{.Title}}</a>]</td>
+        <td>{{printf "%s" .Body}}</td>
+    </tr>
+{{end}}
+</table>
+</div>

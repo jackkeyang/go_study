@@ -1,0 +1,25 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"model"
+	"net/http"
+)
+
+func Index(w http.ResponseWriter, r *http.Request) {
+	user := model.Users{}
+	fmt.Fprint(w, user.SelectAll())
+}
+
+func UserInfo(w http.ResponseWriter, r *http.Request) {
+	user := model.Users{Id: 1}
+	data, _ := json.Marshal(user.SelectOne())
+	fmt.Fprint(w, string(data))
+}
+
+func main() {
+	http.HandleFunc("/", Index)
+	http.HandleFunc("/one", UserInfo)
+	http.ListenAndServe(":8000", nil)
+}
